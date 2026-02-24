@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sayqin Rustamli | Data Scientist & AI Specialist</title>
+    <style>
+        /* Modern Editorial / Neo-Brutalist Design */
+        :root {
+            --bg-color: #f4f1eb; /* Warm off-white */
+            --text-color: #1a1a1a; /* Soft black */
+            --accent-color: #d95c41; /* Terracotta red */
+            --business-color: #2b5c73; /* Deep blue for business focus */
+            --border-color: #1a1a1a;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Georgia', serif;
+            margin: 0 0 10px 0;
+            font-weight: normal;
+        }
+
+        h1 {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            letter-spacing: -1px;
+            line-height: 1.1;
+        }
+
+        h2 {
+            font-size: 2rem;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 5px;
+            margin-top: 60px;
+            margin-bottom: 30px;
+        }
+
+        p {
+            margin: 0 0 15px 0;
+        }
+
+        a {
+            color: var(--text-color);
+            text-decoration: none;
+            font-weight: bold;
+            border-bottom: 2px solid var(--accent-color);
+            transition: all 0.2s;
+        }
+
+        a:hover {
+            background-color: var(--accent-color);
+            color: #fff;
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            border: 3px solid var(--border-color);
+            padding: clamp(20px, 5vw, 40px);
+            background: #fff;
+            box-shadow: 8px 8px 0px var(--accent-color);
+            margin-bottom: 50px;
+            position: relative;
+            transition: box-shadow 0.4s ease;
+        }
+
+        /* Perspective Toggle UI */
+        .toggle-wrapper {
+            margin-top: 30px;
+            border-top: 1px dashed var(--border-color);
+            padding-top: 20px;
+        }
+
+        .toggle-label {
+            font-family: monospace;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .controls {
+            display: inline-flex;
+            border: 2px solid var(--border-color);
+            border-radius: 40px;
+            background: var(--bg-color);
+            overflow: hidden;
+        }
+
+        .toggle-btn {
+            padding: 8px 20px;
+            border: none;
+            background: transparent;
+            font-family: 'Helvetica Neue', sans-serif;
+            font-weight: bold;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+
+        .toggle-btn:not(:last-child) {
+            border-right: 2px solid var(--border-color);
+        }
+
+        .toggle-btn.active[data-target="all"] { background: var(--text-color); color: #fff; }
+        .toggle-btn.active[data-target="tech"] { background: var(--accent-color); color: #fff; }
+        .toggle-btn.active[data-target="business"] { background: var(--business-color); color: #fff; }
+
+        .contact-info {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            font-family: monospace;
+            font-size: 0.95rem;
+        }
+
+        /* Grid for Sections */
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Cards */
+        .card {
+            border: 2px solid var(--border-color);
+            padding: 24px;
+            background: #fff;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 6px 6px 0px var(--border-color);
+        }
+
+        /* Dimming effect for non-focused cards */
+        .card.dimmed {
+            opacity: 0.25;
+            transform: scale(0.98);
+            box-shadow: none;
+            filter: grayscale(100%);
+            pointer-events: none;
+        }
+
+        .card h3 {
+            font-family: 'Helvetica Neue', sans-serif;
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .card .meta {
+            font-family: monospace;
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .tag {
+            display: inline-block;
+            background: var(--text-color);
+            color: #fff;
+            padding: 4px 10px;
+            font-size: 0.75rem;
+            font-family: monospace;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+        }
+
+        /* Scroll Animation Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .animate-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Header theme changes based on toggle */
+        body.theme-tech header { box-shadow: 8px 8px 0px var(--accent-color); }
+        body.theme-business header { box-shadow: 8px 8px 0px var(--business-color); }
+        body.theme-all header { box-shadow: 8px 8px 0px var(--text-color); }
+
+        html { scroll-behavior: smooth; }
+
+    </style>
+</head>
+<body class="theme-all" onload="window.scrollTo(0, 0)">
+
+<!-- Navigation -->
+<nav style="background: #fff; border-bottom: 2px solid #1a1a1a; padding: 15px 0; position: sticky; top: 0; z-index: 100;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; max-width: 900px; margin: 0 auto; padding: 0 20px;">
+        <div style="font-family: 'Georgia', serif; font-size: 1.5rem; font-weight: bold;">SR</div>
+        <div style="display: flex; gap: 20px; font-family: monospace; font-size: 0.9rem; align-items: center;">
+            <a href="#about" style="color: #1a1a1a; text-decoration: none;"><span class="lang-text" data-en="About" data-fr="À Propos">About</span></a>
+            <a href="#education" style="color: #1a1a1a; text-decoration: none;"><span class="lang-text" data-en="Education" data-fr="Formation">Education</span></a>
+            <a href="#experience" style="color: #1a1a1a; text-decoration: none;"><span class="lang-text" data-en="Experience" data-fr="Expérience">Experience</span></a>
+            <a href="#projects" style="color: #1a1a1a; text-decoration: none;"><span class="lang-text" data-en="Projects" data-fr="Projets">Projects</span></a>
+            <a href="#skills" style="color: #1a1a1a; text-decoration: none;"><span class="lang-text" data-en="Skills" data-fr="Compétences">Skills</span></a>
+            <a href="#contact" style="color: #1a1a1a; text-decoration: none;"><span class="lang-text" data-en="Contact" data-fr="Contact">Contact</span></a>
+            <button onclick="toggleLanguage()" style="background: #1a1a1a; color: #fff; border: none; padding: 5px 12px; cursor: pointer; font-family: monospace; font-size: 0.8rem;">FR</button>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <header class="animate-on-scroll is-visible" id="contact">
+        <h1>Sayqin Rustamli</h1>
+        <p style="font-size: 1.3rem; color: #444; margin-bottom: 5px;">Data Scientist & AI Specialist</p>
+        <p style="font-family: monospace; color: #666;">Strasbourg, France</p>
+
+        <div class="contact-info">
+            <span>sayqinr@gmail.com</span>
+            <a href="https://www.linkedin.com/in/saygin-r-80b827114/" target="_blank">LinkedIn</a>
+            <a href="https://github.com/sayqin" target="_blank">GitHub</a>
+        </div>
+    </header>
+
+    <section>
+        <h2 class="animate-on-scroll" id="about"><span class="lang-text" data-en="About Me" data-fr="À Propos">About Me</span></h2>
+        <div class="card animate-on-scroll">
+            <p><span class="lang-text" data-en="Data Science master's student at University of Strasbourg with a unique blend of finance background and technical AI/ML expertise. Experienced in building end-to-end ML pipelines, deploying LLMs in production, and translating complex data into actionable business insights. Passionate about applying AI to solve real-world problems." data-fr="Étudiant en Master Data Science à l'Université de Strasbourg avec un mélange unique de背景 en finance et expertise technique en IA/ML. Expérimenté dans la construction de pipelines ML de bout en bout, le déploiement de LLM en production, et la traduction de données complexes en informations métier exploitables. Passionné par l'application de l'IA pour résoudre des problèmes réels.">Data Science master's student at University of Strasbourg with a unique blend of finance background and technical AI/ML expertise. Experienced in building end-to-end ML pipelines, deploying LLMs in production, and translating complex data into actionable business insights. Passionate about applying AI to solve real-world problems.</span></p>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="animate-on-scroll" id="education"><span class="lang-text" data-en="Education" data-fr="Formation">Education</span></h2>
+        <div class="grid-2">
+            <div class="card animate-on-scroll">
+                <h3>University of Strasbourg</h3>
+                <span class="meta">France | 2024-2026</span>
+                <p><strong>M.Sc. Data Science for Economics</strong><br>
+                Specialization: Programming, Machine & Deep Learning, Advanced Statistics, Cloud/MLOps.</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3>University of Warsaw</h3>
+                <span class="meta">Poland | 2014-2019</span>
+                <p><strong>B.Sc. Finance and Accounting</strong><br>
+                Mathematics, Financial Analysis, Probability & Statistics, Micro & Macroeconomics.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="animate-on-scroll" id="experience"><span class="lang-text" data-en="Professional Experience" data-fr="Expérience Professionnelle">Professional Experience</span></h2>
+
+        <div class="card animate-on-scroll" style="margin-bottom: 20px;">
+            <h3>Co-Founder (Data & E-commerce)</h3>
+            <span class="meta">E-Lead | Strasbourg, France | Jan 2022 - Oct 2024</span>
+            <ul>
+                <li>Translated complex data into concrete business strategies to drive revenue growth.</li>
+                <li>Analyzed transactional data to optimize pricing strategies, product sourcing, and overall profitability.</li>
+                <li>Conducted algorithmic optimization of the supply chain and ensured reliable management of supplier flows.</li>
+            </ul>
+        </div>
+
+        <div class="card animate-on-scroll" style="margin-bottom: 20px;">
+            <h3>Junior Product Controller</h3>
+            <span class="meta">Natwest Markets | Warsaw, Poland | Jan 2019 - Aug 2019</span>
+            <ul>
+                <li>Performed strict reconciliation and quality control of complex financial data (P&L) to guarantee reliable reporting pipelines.</li>
+                <li>Rigorously validated market transactions, ensuring absolute integrity of trading databases.</li>
+                <li>Resolved pricing anomalies in direct collaboration with quantitative modeling teams.</li>
+            </ul>
+        </div>
+
+        <div class="grid-2">
+             <div class="card animate-on-scroll">
+                <h3>AML Analyst</h3>
+                <span class="meta">RBS | Warsaw | Apr 2018 - Dec 2018</span>
+                <p>Investigated massive transactional patterns using data analysis techniques for anomaly detection. Strengthened KYC/AML regulatory compliance.</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3>Web Content Analyst</h3>
+                <span class="meta">Accenture | Warsaw | Mar 2016 - Dec 2018</span>
+                <p>Executed large-scale textual processing and classification to secure and improve search engine algorithms.</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="animate-on-scroll" id="projects"><span class="lang-text" data-en="Data Projects & AI Integration" data-fr="Projets Data & IA">Data Projects & AI Integration</span></h2>
+        <div class="grid-2">
+            <div class="card animate-on-scroll">
+                <span class="tag" style="background: var(--accent-color);">RAG</span>
+                <h3>Agent-IA-academique</h3>
+                <p><span class="lang-text" data-en="Built production-ready RAG system using local LLaMA 3.2 via Ollama with ChromaDB vector store. FastAPI backend + Streamlit UI." data-fr="Système RAG prêt pour la production utilisant LLaMA 3.2 local via Ollama avec ChromaDB. Backend FastAPI + UI Streamlit.">Built production-ready RAG system using local LLaMA 3.2 via Ollama with ChromaDB vector store. FastAPI backend + Streamlit UI.</span></p>
+                <a href="https://github.com/sayqin/Agent-IA-academique" target="_blank">GitHub</a>
+            </div>
+            <div class="card animate-on-scroll">
+                <span class="tag" style="background: var(--business-color);">DATA SCIENCE</span>
+                <h3>Churn Prediction</h3>
+                <p><span class="lang-text" data-en="End-to-end ML pipeline for customer churn prediction using Random Forest. EDA, feature engineering on large-scale customer data." data-fr="Pipeline ML de bout en bout pour la prédiction de désabonnement avec Random Forest. EDA, feature engineering sur données client.">End-to-end ML pipeline for customer churn prediction using Random Forest. EDA, feature engineering on large-scale customer data.</span></p>
+                <a href="https://github.com/sayqin/churn-prediction" target="_blank">GitHub</a>
+            </div>
+            <div class="card animate-on-scroll">
+                <span class="tag" style="background: var(--text-color);">GEN AI</span>
+                <h3>Article Bot</h3>
+                <p><span class="lang-text" data-en="Chrome extension with Flask backend. OpenAI GPT-4 API for article summarization and sentiment analysis from Le Monde/Le Figaro." data-fr="Extension Chrome avec backend Flask. API OpenAI GPT-4 pour résumé et analyse de sentiments d'articles Le Monde/Le Figaro.">Chrome extension with Flask backend. OpenAI GPT-4 API for article summarization and sentiment analysis from Le Monde/Le Figaro.</span></p>
+                <a href="https://github.com/sayqin/bot_discord" target="_blank">GitHub</a>
+            </div>
+            <div class="card animate-on-scroll">
+                <span class="tag" style="background: var(--accent-color);">DEEP LEARNING</span>
+                <h3>Climate Prediction (LSTM)</h3>
+                <p><span class="lang-text" data-en="LSTM neural networks for time series forecasting of city temperature anomalies. PyTorch with CUDA acceleration." data-fr="Réseaux de neurones LSTM pour la prévision de séries temporelles d'anomalies de température. PyTorch avec accélération CUDA.">LSTM neural networks for time series forecasting of city temperature anomalies. PyTorch with CUDA acceleration.</span></p>
+                <a href="https://github.com/sayqin/Climate-Change-Earth-Surface-Temperature-Data" target="_blank">GitHub</a>
+            </div>
+            <div class="card animate-on-scroll">
+                <span class="tag" style="background: var(--business-color);">RESEARCH</span>
+                <h3>Cournot-RL</h3>
+                <p><span class="lang-text" data-en="RL applied to microeconomic environments. Regret-minimizing policy gradient bridging RL and Game Theory." data-fr="RL appliquée aux environnements microéconomiques. Policy gradient à minimisation de regret reliant RL et Théorie des Jeux.">RL applied to microeconomic environments. Regret-minimizing policy gradient bridging RL and Game Theory.</span></p>
+                <a href="https://github.com/sayqin/Cournot-RL-" target="_blank">GitHub</a>
+            </div>
+            <div class="card animate-on-scroll">
+                <span class="tag" style="background: var(--text-color);">DATABASE</span>
+                <h3>Budget Tracker</h3>
+                <p><span class="lang-text" data-en="SQLite database with 5 normalized tables. CRUD operations using pure Python standard library." data-fr="Base de données SQLite avec 5 tables normalisées. Opérations CRUD en Python pur.">SQLite database with 5 normalized tables. CRUD operations using pure Python standard library.</span></p>
+                <a href="https://github.com/sayqin/budget-tracker" target="_blank">GitHub</a>
+            </div>
+            <div class="card animate-on-scroll">
+                <span class="tag" style="background: var(--text-color);">DEPLOYMENT</span>
+                <h3>Tech & AI Channel</h3>
+                <p><span class="lang-text" data-en="Automated content curation via Telegram Bot API with NLP pipeline for intelligent filtering and classification." data-fr="Curation de contenu automatisée via API Telegram Bot avec pipeline NLP pour filtrage et classification intelligents.">Automated content curation via Telegram Bot API with NLP pipeline for intelligent filtering and classification.</span></p>
+                <a href="https://t.me/techllm" target="_blank">Telegram</a>
+            </div>
+            <div class="card animate-on-scroll">
+                <span class="tag" style="background: var(--accent-color);">FULL-STACK</span>
+                <h3>AI Presentation Maker</h3>
+                <p><span class="lang-text" data-en="Full-stack AI-powered presentation generator with generative AI integration. Deployed on Netlify." data-fr="Générateur de présentations alimenté par l'IA full-stack avec intégration d'IA générative. Déployé sur Netlify.">Full-stack AI-powered presentation generator with generative AI integration. Deployed on Netlify.</span></p>
+                <a href="https://peppy-baklava-8a4349.netlify.app/" target="_blank">Live Site</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="animate-on-scroll" id="skills"><span class="lang-text" data-en="Technical Skills" data-fr="Compétences Techniques">Technical Skills</span></h2>
+        <div class="grid-2">
+            <div class="card animate-on-scroll">
+                <h3><span class="lang-text" data-en="Supervised Learning" data-fr="Apprentissage Supervisé">Supervised Learning</span></h3>
+                <p>Linear Regression, Logistic Regression, Decision Trees, Random Forest, XGBoost, Gradient Boosting, SVM, KNN</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3><span class="lang-text" data-en="Unsupervised Learning" data-fr="Apprentissage Non Supervisé">Unsupervised Learning</span></h3>
+                <p>K-Means, PCA, Clustering</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3><span class="lang-text" data-en="Deep Learning" data-fr="Apprentissage Profond">Deep Learning</span></h3>
+                <p>Neural Networks, LSTM, CNN, TensorFlow, PyTorch</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3><span class="lang-text" data-en="Reinforcement Learning" data-fr="Apprentissage par Renforcement">Reinforcement Learning</span></h3>
+                <p>Q-Learning, DQN, Policy Gradient, Game Theory, Multi-Agent Systems</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3><span class="lang-text" data-en="NLP" data-fr="Traitement du Langage Naturel">NLP</span></h3>
+                <p>Text Processing, Sentiment Analysis, RAG, LLM Integration, Sentence-Transformers</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3><span class="lang-text" data-en="AI Engineering" data-fr="Ingénierie IA">AI Engineering</span></h3>
+                <p>Ollama, ChromaDB, OpenAI API, FastAPI, Streamlit</p>
+            </div>
+            <div class="card animate-on-scroll">
+                <h3><span class="lang-text" data-en="Tools & Data" data-fr="Outils & Data">Tools & Data</span></h3>
+                <p>Pandas, NumPy, Scikit-learn, Docker, Git, SQL, JavaScript</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2 class="animate-on-scroll"><span class="lang-text" data-en="Languages" data-fr="Langues">Languages</span></h2>
+        <div class="card animate-on-scroll">
+            <ul style="list-style-type: square;">
+                <li><strong>English:</strong> Fluent</li>
+                <li><strong>French:</strong> Advanced</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer style="margin-top: 60px; text-align: center; padding: 20px; font-family: monospace; border-top: 2px solid var(--border-color);">
+        <p>2026 Sayqin Rustamli. Designed for impact.</p>
+    </footer>
+</div>
+
+<script>
+    // --- LENS TOGGLE LOGIC ---
+    const toggleBtns = document.querySelectorAll('.toggle-btn');
+    const focusItems = document.querySelectorAll('.focus-item');
+    const body = document.body;
+
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            // Remove active class from all buttons
+            toggleBtns.forEach(b => b.classList.remove('active'));
+            // Add active class to clicked button
+            btn.classList.add('active');
+
+            const target = btn.getAttribute('data-target');
+
+            // Update Body Theme (changes header shadow color)
+            body.className = `theme-${target}`;
+
+            // Filter logic
+            focusItems.forEach(item => {
+                const categories = item.getAttribute('data-category').split(' ');
+
+                if (target === 'all') {
+                    item.classList.remove('dimmed');
+                } else if (categories.includes(target)) {
+                    item.classList.remove('dimmed');
+                } else {
+                    item.classList.add('dimmed');
+                }
+            });
+        });
+    });
+
+    // --- SCROLL ANIMATION LOGIC ---
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15 // Trigger when 15% of the element is visible
+    };
+
+    const observer = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+                // Optional: Stop observing once it has animated in
+                // observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+
+    // Select all elements to animate
+    document.querySelectorAll('.animate-on-scroll').forEach((el) => {
+        observer.observe(el);
+    });
+
+    // Language toggle
+    let currentLang = 'en';
+    function toggleLanguage() {
+        currentLang = currentLang === 'en' ? 'fr' : 'en';
+        document.querySelectorAll('.lang-text').forEach(el => {
+            el.textContent = el.getAttribute('data-' + currentLang);
+        });
+        document.querySelector('button[onclick="toggleLanguage()"]').textContent = currentLang === 'en' ? 'FR' : 'EN';
+    }
+</script>
+
+</body>
+</html>
